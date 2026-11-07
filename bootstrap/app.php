@@ -11,7 +11,21 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'cekUser' => \App\Http\Middleware\CekUser::class,
+        ]);
+
+        $middleware->redirectUsersTo(function (Request $request) {
+            if ($request->user()->level == 'administrasi') {
+                return '/admin';
+            }
+
+            if ($request->user()->level == 'gurubk') {
+                return '/guru';
+            }
+
+            return '/';
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
