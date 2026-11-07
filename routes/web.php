@@ -9,12 +9,12 @@ use App\Http\Controllers\GuruController;
 //     return view('welcome');
 // });
 
-Route::middleware('guest')->group(function () {
+Route::middleware('guest', 'noCache')->group(function () {
     Route::get('/', [SesiController::class, 'index'])->name('login');
     Route::post('/', [SesiController::class, 'login']);
 });
 
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth', 'noCache'])->group(function() {
     Route::get('/logout', [SesiController::class, 'logout']);
 
     Route::middleware(['cekUser:administrasi'])->group(function () {
