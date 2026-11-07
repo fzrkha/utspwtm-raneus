@@ -19,7 +19,6 @@ class MuridSeeder extends Seeder
         // Generate 20 data murid acak
         for ($i = 1; $i <= 20; $i++) {
             DB::table('murid')->insert([
-                'id' => $i,
                 // NIS maks 4 karakter (format: 1001, 1002, dst.)
                 'nis' => (string) (1000 + $i),
                 // Nama maks 40 karakter

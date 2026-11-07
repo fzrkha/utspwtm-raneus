@@ -2,19 +2,18 @@
 
 namespace App\Models;
 
-use Illumanate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illumanate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 
 
 class Pengguna extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable;
     protected $table = 'pengguna';
     protected $guarded = ['id'];
-    protected $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'nip',

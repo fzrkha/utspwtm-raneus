@@ -35,7 +35,7 @@ return new class extends Migration
                   ->onUpdate('cascade');
         });
 
-        DB::statement('ALTER TABLE pengguna MODIFY id INT NOT NULL AUTO_INCREMENT');
+        DB::statement('ALTER TABLE tanggapan MODIFY id INT NOT NULL AUTO_INCREMENT');
     }
 
     /**

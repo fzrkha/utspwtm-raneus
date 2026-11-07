@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::statement('ALTER TABLE pengguna MODIFY id INT NOT NULL AUTO_INCREMENT');
+        DB::statement('ALTER TABLE murid MODIFY id INT NOT NULL AUTO_INCREMENT');
     }
 
     /**

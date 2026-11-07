@@ -16,7 +16,6 @@ class PenggunaSeeder extends Seeder
     {
         for ($i = 1; $i <= 10; $i++) {
             DB::table('pengguna')->insert([
-                'id' => $i,
                 // NIP 10 digit angka (contoh: 1980120101)
                 'nip' => fake()->unique()->numerify('19########'),
                 // Nama maks 40 karakter
