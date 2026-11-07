@@ -1,7 +1,8 @@
 # utspwtm-raneus
-2411500362 | Fansoli Ibnu Mustafa
-2411501121 | Puteri Jasmine Salsabila
-2411500206 | Muhammad Raka Pratama
+Tugas UTS PWTM Kelas AF, Kelompok Raneus, Universitas Budi Luhur <br>
+2411500362 | Fansoli Ibnu Mustafa <br>
+2411501121 | Puteri Jasmine Salsabila <br>
+2411500206 | Muhammad Raka Pratama <br>
 
 <hr>
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
