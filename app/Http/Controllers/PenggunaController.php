@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pengguna;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class PenggunaController extends Controller
 {
@@ -11,7 +14,13 @@ class PenggunaController extends Controller
      */
     public function index()
     {
-        //
+        $data = Pengguna::orderBy('nip', 'asc')->get();
+
+        $user = Auth::user();
+
+        return view('admin.pengguna', compact('data'));
+
+        abort(403);
     }
 
     /**
