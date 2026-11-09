@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('title', 'Dashboard')
+@section('title', 'Dashboard Administrasi')
 @section('content')
 <div id="layoutSidenav_content">
     <main>
