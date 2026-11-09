@@ -12,7 +12,7 @@ class Murid extends Model
 
     protected $table = 'murid';
     protected $guarded = ['id'];
-    protected $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'nis',

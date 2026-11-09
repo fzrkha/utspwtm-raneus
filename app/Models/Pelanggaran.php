@@ -12,7 +12,7 @@ class Pelanggaran extends Model
     use HasFactory;
     protected $guarded = ['id'];
     protected $table = 'pelanggaran';
-    protected $timestamps = false;
+    public $timestamps = false;
     
     protected $casts = [
         'tgl_pel' => 'date',

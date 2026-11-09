@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>
 <body>
-    <nav class="navbar sm:navbar-expand bg-black" data-bs-theme="dark">
+    <nav class="navbar sm:navbar-expand bg-black sticky-top" data-bs-theme="dark">
         <div class="container-fluid ms-5 d-flex">
             <a class="navbar-brand fg-primary text-lg" href="#">Pelanggaran Murid</a>
 
@@ -55,22 +55,22 @@
                                     Tanggapan
                                 </a>
                             @elseif (Auth::user()->level == 'gurubk')
-                                <a class="nav-link {{ request()->is('admin') ? 'active' : '' }}" href="/admin">
+                                <a class="nav-link {{ request()->is('guru') ? 'active' : '' }}" href="/guru">
                                     <i class="fa-solid fa-home"></i>
                                     Dashboard
                                 </a>
                     
-                                <a class="nav-link {{ request()->is('admin/murid*') ? 'active' : '' }}" href="/admin/murid">
+                                <a class="nav-link {{ request()->is('guru/murid*') ? 'active' : '' }}" href="/guru/murid">
                                     <i class="fa-solid fa-user-graduate"></i>
                                     Murid
                                 </a>
                     
-                                <a class="nav-link {{ request()->is('admin/pelanggaran*') ? 'active' : '' }}" href="/admin/pelanggaran">
+                                <a class="nav-link {{ request()->is('guru/pelanggaran*') ? 'active' : '' }}" href="/guru/pelanggaran">
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                     Pelanggaran
                                 </a>
                     
-                                <a class="nav-link {{ request()->is('admin/tanggapan*') ? 'active' : '' }}" href="/admin/tanggapan">
+                                <a class="nav-link {{ request()->is('guru/tanggapan*') ? 'active' : '' }}" href="/guru/tanggapan">
                                     <i class="fa-solid fa-comments"></i>
                                     Tanggapan
                                 </a>
@@ -92,7 +92,7 @@
         </div>
     </nav>
 
-    <section>
+    <section class="container mt-5">
         @yield('content')
     </section>
 </body>
