@@ -40,7 +40,7 @@
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Menu</div>
                         <?php
-                            if(Auth()::user()->level=='administrasi'){
+                            if(Auth::user()->level=='administrasi'){
                                 echo "<a class='nav-link' href='/admin'>";
                             } elseif(Auth::user()->level='gurubk'){
                                 echo "<a class='nav-link' href='/guru'>";
@@ -60,8 +60,14 @@
                             
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link"href="#">Petugas</a>
-                                <a class="nav-link"href="#">Siswa</a>
+                                <?php
+                                    if(Auth::user()->level=='administrasi'){
+                                        echo "<a class='nav-link' href='admin/pengguna'>Pengguna</a>";
+                                        echo "<a class='nav-link' href='admin/murid'>Murid</a>";
+                                    } elseif(Auth::user()->level='gurubk'){
+                                        echo "<a class='nav-link' href='guru/murid'>Murid</a>";
+                                    }
+                                ?>
                             </nav>
                         </div>
                             
@@ -73,8 +79,15 @@
                         
                         <div class="collapse" id="collapseKejadian" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link"href="#">Pelanggaran</a>
-                                <a class="nav-link"href="#">Tanggapan</a>
+                                <?php
+                                    if(Auth::user()->level=='administrasi'){
+                                        echo "<a class='nav-link' href='admin/pelanggaran'>Pelanggaran</a>";
+                                        echo "<a class='nav-link' href='admin/tanggapan'>Tanggapan</a>";
+                                    } elseif(Auth::user()->level='gurubk'){
+                                        echo "<a class='nav-link' href='admin/pelanggaran'>Pelanggaran</a>";
+                                        echo "<a class='nav-link' href='admin/tanggapan'>Tanggapan</a>";
+                                    }
+                                ?>
                             </nav>
                         </div>
                     </div>
