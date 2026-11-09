@@ -13,10 +13,6 @@
 <body style="background-color: hsl(0, 0%, 96%)">
     <div id="app">
         <div class="main-wrapper">
-            <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-                <a href="/" class="navbar-brand ms-5">Pelanggaran Murid</a>
-            </nav>
-
             <div class="main-content">
                 @yield('content')
             </div>
