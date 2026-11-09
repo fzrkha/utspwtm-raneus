@@ -14,13 +14,11 @@ class MuridController extends Controller
      */
     public function index()
     {
-        $data = Murid::orderBy('nama', 'asc')->get();
-
+        $data = Murid::all();
         $user = Auth::user();
 
         if ($user->level == 'administrasi') {
             return view('admin.murid', compact('data'));
-
         } elseif ($user->level == 'gurubk') {
             return view('guru.murid', compact('data'));
         }
