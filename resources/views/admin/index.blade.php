@@ -94,6 +94,21 @@
         color: #198754;
     }
 
+    .icon-violet {
+        background: #d9b8ff;
+        color: #4600b6;
+    }
+
+    .icon-pink {
+        background: #fdd9ff;
+        color: #ee6bff;
+    }
+
+    .icon-black {
+        background: #000000;
+        color: #797979;
+    }
+
     .progress-card {
         background: #fff;
         border: 1px solid #f0f0f0;
@@ -204,6 +219,39 @@
     <h5 class="section-title">Ringkasan Data</h5>
 
     <div class="stats-grid">
+        <div class="stats-card">
+            <div class="stats-icon icon-black">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div class="stats-info">
+                <p>Total Pengguna</p>
+                <h3>{{ $jumlahPengguna }}</h3>
+            </div>
+        </div>
+
+        <div class="stats-card">
+            <div class="stats-icon icon-violet">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div class="stats-info">
+                <p>Jumlah Admin</p>
+                <h3>{{ $jumlahAdministrasi }}</h3>
+            </div>
+        </div>
+
+        <div class="stats-card">
+            <div class="stats-icon icon-pink">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div class="stats-info">
+                <p>Jumlah Guru BK</p>
+                <h3>{{ $jumlahGuruBK }}</h3>
+            </div>
+        </div>
+
         <div class="stats-card">
             <div class="stats-icon icon-blue">
                 <i class="fa-solid fa-user-graduate"></i>

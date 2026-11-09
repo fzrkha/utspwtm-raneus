@@ -79,9 +79,15 @@
                                 >
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
-                            </td>
-                        </tr>
-                    @endforeach
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center py-4">
+                                    Belum ada data murid.
+                                </td>
+                            </tr>
+                        @endforelse
                 </tbody>
             </table>
         </div>
@@ -175,30 +181,25 @@
 <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
 <script>
-$(document).ready(function () {
-    // Inisialisasi DataTables
-    $('#tabelMurid').DataTable({
-        "pageLength": 10,
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json"
-        }
-    });
-
-    // Menangkap aksi klik Edit menggunakan event delegation (agar berfungsi di semua page DataTables)
+$(function () {
     $(document).on('click', '.btn-edit', function () {
         let button = $(this);
+
         $('#formEdit').attr('action', button.attr('data-url'));
+
         $('#editNis').val(button.attr('data-nis'));
         $('#editNama').val(button.attr('data-nama'));
         $('#editKelas').val(button.attr('data-kelas'));
     });
 
-    // Menangkap aksi klik Hapus
     $(document).on('click', '.btn-delete', function () {
         let button = $(this);
+
         $('#formHapus').attr('action', button.attr('data-url'));
+
         $('#hapusNama').text(button.attr('data-nama'));
     });
+
 });
 </script>
 @endsection
