@@ -77,15 +77,15 @@
                                 >
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5" class="text-center py-4">
-                                    Belum ada data murid.
-                                </td>
-                            </tr>
-                        @endforelse
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center py-4">
+                                Belum ada data murid.
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -212,24 +212,43 @@
 </dialog>
 
 <script>
-$(function () {
-    $(document).on('click', '.btn-edit', function () {
-        let button = $(this);
+$(document).ready(function () {
 
-        $('#formEdit').attr('action', button.attr('data-url'));
+    // Dialog Edit Murid
+    $('.btn-edit').on('click', function () {
 
-        $('#editNis').val(button.attr('data-nis'));
-        $('#editNama').val(button.attr('data-nama'));
-        $('#editKelas').val(button.attr('data-kelas'));
+        // Mengambil data dari tombol
+        let url = $(this).data('url');
+        let nis = $(this).data('nis');
+        let nama = $(this).data('nama');
+        let kelas = $(this).data('kelas');
+
+        // Mengatur action form
+        $('#formEdit').attr('action', url);
+
+        // Mengisi data murid
+        $('#editNis').val(nis);
+        $('#editNama').val(nama);
+        $('#editKelas').val(kelas);
+
     });
 
-    $(document).on('click', '.btn-delete', function () {
-        let button = $(this);
 
-        $('#formHapus').attr('action', button.attr('data-url'));
+    // Dialog Hapus Murid
+    $('.btn-delete').on('click', function () {
 
-        $('#hapusNama').text(button.attr('data-nama'));
+        // Mengambil data dari tombol
+        let url = $(this).data('url');
+        let nama = $(this).data('nama');
+
+        // Mengatur action form
+        $('#formHapus').attr('action', url);
+
+        // Menampilkan nama murid
+        $('#hapusNama').text(nama);
+
     });
+
 });
 </script>
 

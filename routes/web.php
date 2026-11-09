@@ -26,5 +26,7 @@ Route::middleware(['auth', 'noCache'])->group(function() {
 
     Route::middleware(['cekUser:gurubk'])->group(function () {
         Route::get('/guru', [GuruController::class, 'index']);
+
+        Route::resource('/guru/murid', MuridController::class)->names('guru.murid');
     });
 });
