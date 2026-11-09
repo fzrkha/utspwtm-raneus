@@ -19,7 +19,7 @@ class GuruController extends Controller
 
         $persentase = $jumlahPelanggaran > 0 ? round(($sudahDitanggapi / $jumlahPelanggaran) * 100) : 0;
 
-        return view('admin.index', [
+        return view('guru.index', [
             'jumlahMurid' => $jumlahMurid,
             'jumlahPelanggaran' => $jumlahPelanggaran,
             'jumlahTanggapan' => $jumlahTanggapan,
