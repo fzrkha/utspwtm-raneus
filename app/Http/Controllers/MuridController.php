@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Murid;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class MuridController extends Controller
 {
@@ -11,7 +14,18 @@ class MuridController extends Controller
      */
     public function index()
     {
-        //
+        $data = Murid::orderBy('nama', 'asc')->get();
+
+        $user = Auth::user();
+
+        if ($user->level == 'administrasi') {
+            return view('admin.murid', compact('data'));
+
+        } elseif ($user->level == 'gurubk') {
+            return view('guru.murid', compact('data'));
+        }
+
+        abort(403);
     }
 
     /**
@@ -27,7 +41,19 @@ class MuridController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nis' => 'required|string|size:4|unique:murid,nis',
+            'nama' => 'required|string|max:40',
+            'kelas' => 'required|string|max:10',
+        ]);
+
+        Murid::create($request->only([
+            'nis',
+            'nama',
+            'kelas'
+        ]));
+
+        return redirect('/admin/murid')->with('success', 'Data murid berhasil ditambahkan.');
     }
 
     /**
@@ -51,7 +77,19 @@ class MuridController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $murid = Murid::findOrFail($id);
+
+        $request->validate([
+            'nama' => 'required|string|max:40',
+            'kelas' => 'required|string|max:10',
+        ]);
+
+        $murid->update($request->only([
+            'nama',
+            'kelas'
+        ]));
+
+        return redirect('/admin/murid')->with('success', 'Data murid berhasil diperbarui.');
     }
 
     /**
@@ -59,6 +97,14 @@ class MuridController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $murid = Murid::findOrFail($id);
+
+        if ($murid->pelanggaran()->exists()) {
+            return redirect('/admin/murid')->with('error', 'Murid masih memiliki data pelanggaran.');
+        }
+
+        $murid->delete();
+
+        return redirect('/admin/murid')->with('success', 'Data murid berhasil dihapus.');
     }
 }

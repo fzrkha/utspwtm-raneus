@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\MuridController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -19,6 +20,8 @@ Route::middleware(['auth', 'noCache'])->group(function() {
 
     Route::middleware(['cekUser:administrasi'])->group(function () {
         Route::get('/admin', [AdminController::class, 'index']);
+
+        Route::resource('/admin/murid', MuridController::class)->names('admin.murid');
     });
 
     Route::middleware(['cekUser:gurubk'])->group(function () {

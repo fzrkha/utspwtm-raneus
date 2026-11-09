@@ -11,8 +11,9 @@ class Murid extends Model
     use HasFactory;
 
     protected $table = 'murid';
-    protected $guarded = ['id'];
-    public $timestamps = false;
+    protected $primaryKey = 'nis';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     protected $fillable = [
         'nis',

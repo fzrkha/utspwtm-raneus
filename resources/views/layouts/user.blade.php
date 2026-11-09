@@ -10,6 +10,7 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <script src="{{asset('js/jquery-3.7.1.min.js')}}"></script>
 </head>
 <body>
     <nav class="navbar sm:navbar-expand bg-black sticky-top" data-bs-theme="dark">
