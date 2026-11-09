@@ -75,7 +75,7 @@ class MuridController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $murid = Murid::where('id', $id)->firstOrFail();
+        $murid = Murid::findOrFail($id);
 
         $request->validate([
             'nama' => 'required|string|max:40',
@@ -95,7 +95,7 @@ class MuridController extends Controller
      */
     public function destroy(string $id)
     {
-        $murid = Murid::where('id', $id)->firstOrFail();
+        $murid = Murid::findOrFail($id);
 
         if ($murid->pelanggaran()->exists()) {
             return redirect('/admin/murid')->with('error', 'Murid masih memiliki data pelanggaran.');
