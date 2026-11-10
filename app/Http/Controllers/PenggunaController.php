@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pengguna;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class PenggunaController extends Controller
 {
@@ -118,7 +119,7 @@ class PenggunaController extends Controller
         if (Auth::user()->level != 'administrasi') {
             abort(403);
         }
-        
+
         $pengguna = Pengguna::where('id', $id)->firstOrFail();
 
         $pengguna->delete();

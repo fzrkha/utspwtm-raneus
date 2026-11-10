@@ -141,7 +141,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Password</label>
-                <input type="password" name="password" class="form-control"
+                <input type="password" name="password" class="form-control" minlength="8"
                     maxlength="100" required>
             </div>
 
@@ -157,18 +157,15 @@
                     maxlength="100" required>
             </div>
 
-            <div>
+            <div class="mb-3">
                 <label class="form-label">Level</label>
 
-                <select name="level" class="form-select" required>
-                    <option value="" selected disabled>
-                        Pilih level...
-                    </option>
+                <select name="level" class="form-select select-level" required>
+                    <option value=""></option>
                     <option value="administrasi">Administrasi</option>
                     <option value="gurubk">Guru BK</option>
                 </select>
             </div>
-
         </div>
 
         <div class="dialog-footer">
@@ -237,11 +234,11 @@
                     class="form-control" maxlength="100" required>
             </div>
 
-            <div>
+            <div class="mb-3">
                 <label class="form-label">Level</label>
 
                 <select name="level" id="editLevel"
-                    class="form-select" required>
+                    class="form-select select-level" required>
                     <option value="administrasi">Administrasi</option>
                     <option value="gurubk">Guru BK</option>
                 </select>
@@ -301,6 +298,18 @@
 
 <script>
 $(document).ready(function () {
+    // DROPDOWN LEVEL
+    $('#modalTambah .select-level').select2({
+        placeholder: 'Pilih level...',
+        allowClear: true,
+        width: '100%',
+        dropdownParent: $('#modalTambah')
+    });
+
+    $('#modalEdit .select-level').select2({
+        width: '100%',
+        dropdownParent: $('#modalEdit')
+    });
 
     // EDIT PENGGUNA
     $('.btn-edit').on('click', function () {
@@ -311,7 +320,7 @@ $(document).ready(function () {
         let username = $(this).data('username');
         let telp = $(this).data('telp');
         let email = $(this).data('email');
-        let level = $(this).data('level');
+        let level = $(this).data('data-level');
 
         $('#formEdit').attr('action', url);
 
@@ -321,7 +330,7 @@ $(document).ready(function () {
         $('#editPassword').val('');
         $('#editTelp').val(telp);
         $('#editEmail').val(email);
-        $('#editLevel').val(level);
+        $('#editLevel').val(level).trigger('change');
 
     });
 
