@@ -89,28 +89,32 @@
                             </td>
 
                             <td class="text-center">
-                                <button type="button"
-                                    class="btn-outline theme-warning btn-sm btn-edit"
-                                    data-bs-toggle="dialog"
-                                    data-bs-target="#modalEdit"
-                                    data-url="{{ route('guru.pelanggaran.update', $pelanggaran->id) }}"
-                                    data-idplg="{{ $pelanggaran->id_plg }}"
-                                    data-nis="{{ $pelanggaran->nis }}"
-                                    data-isi="{{ $pelanggaran->isi_pel }}"
-                                    data-tanggal="{{ $pelanggaran->tgl_pel }}"
-                                    data-status="{{ $pelanggaran->status }}"
-                                    data-foto="{{ $pelanggaran->foto }}">
-                                    <i class="fa-solid fa-pen"></i>
-                                </button>
+                                @if($pelanggaran->status=='menunggu')
+                                    <button type="button"
+                                        class="btn-outline theme-warning btn-sm btn-edit"
+                                        data-bs-toggle="dialog"
+                                        data-bs-target="#modalEdit"
+                                        data-url="{{ route('guru.pelanggaran.update', $pelanggaran->id) }}"
+                                        data-idplg="{{ $pelanggaran->id_plg }}"
+                                        data-nis="{{ $pelanggaran->nis }}"
+                                        data-isi="{{ $pelanggaran->isi_pel }}"
+                                        data-tanggal="{{ $pelanggaran->tgl_pel }}"
+                                        data-status="{{ $pelanggaran->status }}"
+                                        data-foto="{{ $pelanggaran->foto }}">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
 
-                                <button type="button"
-                                    class="btn-outline theme-danger btn-sm btn-delete"
-                                    data-bs-toggle="dialog"
-                                    data-bs-target="#modalHapus"
-                                    data-url="{{ route('guru.pelanggaran.destroy', $pelanggaran->id) }}"
-                                    data-idplg="{{ $pelanggaran->id_plg }}">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
+                                    <button type="button"
+                                        class="btn-outline theme-danger btn-sm btn-delete"
+                                        data-bs-toggle="dialog"
+                                        data-bs-target="#modalHapus"
+                                        data-url="{{ route('guru.pelanggaran.destroy', $pelanggaran->id) }}"
+                                        data-idplg="{{ $pelanggaran->id_plg }}">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                @else
+                                    -
+                                @endif
                             </td>
                         </tr>
                     @empty

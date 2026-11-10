@@ -85,12 +85,10 @@
                                 </a>
                             @endif
 
-                            <a href="/logout" class="nav-link">
-                                <button type="submit" class="btn-outline theme-danger">
-                                    <i class="fa-solid fa-right-from-bracket me-1"></i>
-                                    Logout
-                                </button>
-                            </a>
+                            <button type="button" class="btn-outline theme-danger" data-bs-toggle="dialog" data-bs-target="#modalLogout">
+                                <i class="fa-solid fa-right-from-bracket me-1"></i>
+                                Logout
+                            </button>
             
                         @endauth
                         
@@ -100,6 +98,36 @@
             </dialog>
         </div>
     </nav>
+
+    <dialog class="dialog dialog-sm" id="modalLogout">
+        <div class="dialog-header">
+            <h5 class="dialog-title fw-bold">
+                Konfirmasi Logout
+            </h5>
+
+            <button type="button" class="btn-close"
+                data-bs-dismiss="dialog" aria-label="Close"></button>
+        </div>
+
+        <div class="dialog-body text-center">
+            <i class="fa-solid fa-right-from-bracket text-danger fa-3x mb-3"></i>
+
+            <p class="mb-0">
+                Yakin ingin keluar dari aplikasi?
+            </p>
+        </div>
+
+        <div class="dialog-footer justify-content-center">
+            <button type="button" class="btn-solid theme-inverse"
+                data-bs-dismiss="dialog">
+                Batal
+            </button>
+
+            <a href="/logout" class="btn-solid theme-danger">
+                Logout
+            </a>
+        </div>
+    </dialog>
 
     <section class="container mt-5">
         @yield('content')
