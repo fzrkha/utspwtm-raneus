@@ -7,6 +7,7 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\MuridController;
 use App\Http\Controllers\PelanggaranController;
+use App\Http\Controllers\TanggapanController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -26,6 +27,7 @@ Route::middleware(['auth', 'noCache'])->group(function() {
         Route::resource('/admin/pengguna', PenggunaController::class)->names('admin.pengguna');
         Route::resource('/admin/murid', MuridController::class)->names('admin.murid');
         Route::resource('/admin/pelanggaran', PelanggaranController::class)->names('admin.pelanggaran');
+        Route::resource('/admin/tanggapan', TanggapanController::class)->names('admin.tanggapan');
     });
 
     Route::middleware(['cekUser:gurubk'])->group(function () {
@@ -33,5 +35,6 @@ Route::middleware(['auth', 'noCache'])->group(function() {
 
         Route::resource('/guru/murid', MuridController::class)->names('guru.murid');
         Route::resource('/guru/pelanggaran', PelanggaranController::class)->names('guru.pelanggaran');
+        Route::resource('/guru/tanggapan', TanggapanController::class)->names('guru.tanggapan');
     });
 });

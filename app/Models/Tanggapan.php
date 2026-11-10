@@ -14,7 +14,7 @@ class Tanggapan extends Model
     public $timestamps = false;
 
     protected $casts = [
-        'tgl_tanggapan' => 'date',
+        'tgl_tgp' => 'date',
     ];
 
     public function pelanggaran(): BelongsTo
