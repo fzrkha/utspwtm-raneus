@@ -32,6 +32,10 @@ class PenggunaController extends Controller
      */
     public function store(Request $request)
     {
+        if (Auth::user()->level != 'administrasi') {
+            abort(403);
+        }
+
         $data = $request->validate([
             'nip' => 'required|string|size:10|unique:pengguna,nip',
             'nama' => 'required|string|max:40',
@@ -70,6 +74,10 @@ class PenggunaController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if (Auth::user()->level != 'administrasi') {
+            abort(403);
+        }
+
         $pengguna = Pengguna::where('id', $id)->firstOrFail();
 
         $data = $request->validate([
@@ -107,6 +115,10 @@ class PenggunaController extends Controller
      */
     public function destroy(string $id)
     {
+        if (Auth::user()->level != 'administrasi') {
+            abort(403);
+        }
+        
         $pengguna = Pengguna::where('id', $id)->firstOrFail();
 
         $pengguna->delete();

@@ -39,6 +39,10 @@ class MuridController extends Controller
      */
     public function store(Request $request)
     {
+        if (Auth::user()->level != 'administrasi') {
+            abort(403);
+        }
+
         $request->validate([
             'nis' => 'required|string|size:4|unique:murid,nis',
             'nama' => 'required|string|max:40',
@@ -75,6 +79,10 @@ class MuridController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if (Auth::user()->level != 'administrasi') {
+            abort(403);
+        }
+
         $murid = Murid::where('id', $id)->firstOrFail();
 
         $request->validate([
@@ -95,6 +103,10 @@ class MuridController extends Controller
      */
     public function destroy(string $id)
     {
+        if (Auth::user()->level != 'administrasi') {
+            abort(403);
+        }
+        
         $murid = Murid::where('id', $id)->firstOrFail();
 
         if ($murid->pelanggaran()->exists()) {
