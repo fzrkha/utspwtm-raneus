@@ -25,6 +25,7 @@ Route::middleware(['auth', 'noCache'])->group(function() {
 
         Route::resource('/admin/pengguna', PenggunaController::class)->names('admin.pengguna');
         Route::resource('/admin/murid', MuridController::class)->names('admin.murid');
+        Route::resource('/admin/pelanggaran', PelanggaranController::class)->names('admin.pelanggaran');
     });
 
     Route::middleware(['cekUser:gurubk'])->group(function () {
