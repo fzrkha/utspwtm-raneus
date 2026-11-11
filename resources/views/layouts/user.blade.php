@@ -23,7 +23,7 @@
 <body>
     <nav class="navbar sm:navbar-expand bg-black sticky-top" data-bs-theme="dark">
         <div class="container-fluid ms-5 d-flex">
-            <a class="navbar-brand fg-primary text-lg" href="#">Pelanggaran Murid</a>
+            <a class="navbar-brand fg-primary text-lg" href="/">Pelanggaran Murid</a>
 
             <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="bi bi-three-dots" aria-hidden="true"></span>
