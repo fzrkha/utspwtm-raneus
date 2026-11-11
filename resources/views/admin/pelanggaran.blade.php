@@ -46,12 +46,17 @@
 
                             <td>
                                 @if ($pelanggaran->foto)
-                                    <a href="{{ asset($pelanggaran->foto) }}"
-                                        target="_blank"
-                                        class="btn-outline theme-primary btn-sm">
+                                    <button type="button"
+                                            class="btn-outline theme-accent btn-sm btn-foto"
+                                            data-foto="{{ asset($pelanggaran->foto) }}"
+                                            data-bs-toggle="dialog"
+                                            data-bs-target="#fotoDialog"
+                                            data-bs-backdrop="static"
+                                            data-bs-keyboard="false">
+
                                         <i class="fa-solid fa-image"></i>
                                         Lihat
-                                    </a>
+                                    </button>
                                 @else
                                     -
                                 @endif
@@ -85,4 +90,135 @@
         Total {{ $data->count() }} data pelanggaran.
     </div>
 </div>
+
+<dialog class="dialog dialog-lg"
+        id="fotoDialog"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        aria-labelledby="fotoDialogLabel">
+
+    <div class="dialog-header">
+        <h5 class="dialog-title fw-bold" id="fotoDialogLabel">
+            Foto Pelanggaran
+        </h5>
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="dialog"
+                aria-label="Close">
+        </button>
+    </div>
+
+    <div class="dialog-body">
+        <div class="foto-preview">
+            <img id="fotoPreview"
+                 src=""
+                 alt="Foto Pelanggaran">
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center gap-2 mt-3">
+            <button type="button"
+                    class="btn-solid theme-secondary btn-sm"
+                    id="zoomOut"
+                    title="Perkecil">
+                <i class="fa-solid fa-minus"></i>
+            </button>
+
+            <span id="zoomValue" class="fw-semibold">
+                100%
+            </span>
+
+            <button type="button"
+                    class="btn-solid theme-secondary btn-sm"
+                    id="zoomIn"
+                    title="Perbesar">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+
+            <button type="button"
+                    class="btn-solid theme-secondary btn-sm"
+                    id="zoomReset">
+                Reset
+            </button>
+        </div>
+    </div>
+
+    <div class="dialog-footer">
+        <button type="button"
+                class="btn-solid theme-accent"
+                data-bs-dismiss="dialog">
+            Close
+        </button>
+    </div>
+</dialog>
+
+<style>
+    .foto-preview {
+        width: 100%;
+        max-height: 65vh;
+        overflow: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .foto-preview img {
+        width: 100%;
+        max-width: none;
+        height: auto;
+        object-fit: contain;
+        display: block;
+    }
+</style>
+
+<script>
+    const fotoDialog = document.getElementById('fotoDialog');
+    const fotoPreview = document.getElementById('fotoPreview');
+
+    const zoomIn = document.getElementById('zoomIn');
+    const zoomOut = document.getElementById('zoomOut');
+    const zoomReset = document.getElementById('zoomReset');
+    const zoomValue = document.getElementById('zoomValue');
+
+    let zoomLevel = 1;
+
+    document.querySelectorAll('.btn-foto').forEach(button => {
+        button.addEventListener('click', function () {
+            fotoPreview.src = this.dataset.foto;
+
+            zoomLevel = 1;
+            updateZoom();
+        });
+    });
+
+    function updateZoom() {
+        fotoPreview.style.width = (zoomLevel * 100) + '%';
+        zoomValue.textContent = Math.round(zoomLevel * 100) + '%';
+
+        zoomOut.disabled = zoomLevel <= 0.5;
+        zoomIn.disabled = zoomLevel >= 3;
+    }
+
+    zoomIn.addEventListener('click', function () {
+        if (zoomLevel < 3) {
+            zoomLevel = Math.min(zoomLevel + 0.25, 3);
+            updateZoom();
+        }
+    });
+
+    zoomOut.addEventListener('click', function () {
+        if (zoomLevel > 0.5) {
+            zoomLevel = Math.max(zoomLevel - 0.25, 0.5);
+            updateZoom();
+        }
+    });
+
+    zoomReset.addEventListener('click', function () {
+        zoomLevel = 1;
+        updateZoom();
+    });
+</script>
 @endsection

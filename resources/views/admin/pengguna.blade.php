@@ -297,55 +297,55 @@
 </dialog>
 
 <script>
-$(document).ready(function () {
-    // DROPDOWN LEVEL
-    $('#modalTambah .select-level').select2({
-        placeholder: 'Pilih level...',
-        allowClear: true,
-        width: '100%',
-        dropdownParent: $('#modalTambah')
+    $(document).ready(function () {
+        // DROPDOWN LEVEL
+        $('#modalTambah .select-level').select2({
+            placeholder: 'Pilih level...',
+            allowClear: true,
+            width: '100%',
+            dropdownParent: $('#modalTambah')
+        });
+
+        $('#modalEdit .select-level').select2({
+            width: '100%',
+            dropdownParent: $('#modalEdit')
+        });
+
+        // EDIT PENGGUNA
+        $('.btn-edit').on('click', function () {
+
+            let url = $(this).data('url');
+            let nip = $(this).data('nip');
+            let nama = $(this).data('nama');
+            let username = $(this).data('username');
+            let telp = $(this).data('telp');
+            let email = $(this).data('email');
+            let level = $(this).data('data-level');
+
+            $('#formEdit').attr('action', url);
+
+            $('#editNip').val(nip);
+            $('#editNama').val(nama);
+            $('#editUsername').val(username);
+            $('#editPassword').val('');
+            $('#editTelp').val(telp);
+            $('#editEmail').val(email);
+            $('#editLevel').val(level).trigger('change');
+
+        });
+
+        // HAPUS PENGGUNA
+        $('.btn-delete').on('click', function () {
+
+            let url = $(this).data('url');
+            let nama = $(this).data('nama');
+
+            $('#formHapus').attr('action', url);
+            $('#hapusNama').text(nama);
+
+        });
+
     });
-
-    $('#modalEdit .select-level').select2({
-        width: '100%',
-        dropdownParent: $('#modalEdit')
-    });
-
-    // EDIT PENGGUNA
-    $('.btn-edit').on('click', function () {
-
-        let url = $(this).data('url');
-        let nip = $(this).data('nip');
-        let nama = $(this).data('nama');
-        let username = $(this).data('username');
-        let telp = $(this).data('telp');
-        let email = $(this).data('email');
-        let level = $(this).data('data-level');
-
-        $('#formEdit').attr('action', url);
-
-        $('#editNip').val(nip);
-        $('#editNama').val(nama);
-        $('#editUsername').val(username);
-        $('#editPassword').val('');
-        $('#editTelp').val(telp);
-        $('#editEmail').val(email);
-        $('#editLevel').val(level).trigger('change');
-
-    });
-
-    // HAPUS PENGGUNA
-    $('.btn-delete').on('click', function () {
-
-        let url = $(this).data('url');
-        let nama = $(this).data('nama');
-
-        $('#formHapus').attr('action', url);
-        $('#hapusNama').text(nama);
-
-    });
-
-});
 </script>
 
 @endsection

@@ -280,55 +280,55 @@
 </dialog>
 
 <script>
-$(document).ready(function () {
+    $(document).ready(function () {
 
-    // DROPDOWN PELANGGARAN
-    $('#modalTambah .select-pelanggaran').select2({
-        placeholder: 'Cari ID pelanggaran atau nama murid...',
-        allowClear: true,
-        width: '100%',
-        dropdownParent: $('#modalTambah')
+        // DROPDOWN PELANGGARAN
+        $('#modalTambah .select-pelanggaran').select2({
+            placeholder: 'Cari ID pelanggaran atau nama murid...',
+            allowClear: true,
+            width: '100%',
+            dropdownParent: $('#modalTambah')
+        });
+
+        $('#modalEdit .select-pelanggaran').select2({
+            placeholder: 'Cari ID pelanggaran atau nama murid...',
+            allowClear: true,
+            width: '100%',
+            dropdownParent: $('#modalEdit')
+        });
+
+
+        // EDIT TANGGAPAN
+        $('.btn-edit').on('click', function () {
+
+            let url = $(this).data('url');
+            let idTgp = $(this).data('idtgp');
+            let idPlg = $(this).data('idplg');
+            let isi = $(this).data('isi');
+            let tanggal = $(this).data('tanggal');
+
+            $('#formEdit').attr('action', url);
+
+            $('#editIdTgp').val(idTgp);
+            $('#editIdPlg').val(String(idPlg)).trigger('change');
+            $('#editIsi').val(isi);
+            $('#editTanggal').val(tanggal);
+
+        });
+
+
+        // HAPUS TANGGAPAN
+        $('.btn-delete').on('click', function () {
+
+            let url = $(this).data('url');
+            let idTgp = $(this).data('idtgp');
+
+            $('#formHapus').attr('action', url);
+            $('#hapusIdTgp').text(idTgp);
+
+        });
+
     });
-
-    $('#modalEdit .select-pelanggaran').select2({
-        placeholder: 'Cari ID pelanggaran atau nama murid...',
-        allowClear: true,
-        width: '100%',
-        dropdownParent: $('#modalEdit')
-    });
-
-
-    // EDIT TANGGAPAN
-    $('.btn-edit').on('click', function () {
-
-        let url = $(this).data('url');
-        let idTgp = $(this).data('idtgp');
-        let idPlg = $(this).data('idplg');
-        let isi = $(this).data('isi');
-        let tanggal = $(this).data('tanggal');
-
-        $('#formEdit').attr('action', url);
-
-        $('#editIdTgp').val(idTgp);
-        $('#editIdPlg').val(String(idPlg)).trigger('change');
-        $('#editIsi').val(isi);
-        $('#editTanggal').val(tanggal);
-
-    });
-
-
-    // HAPUS TANGGAPAN
-    $('.btn-delete').on('click', function () {
-
-        let url = $(this).data('url');
-        let idTgp = $(this).data('idtgp');
-
-        $('#formHapus').attr('action', url);
-        $('#hapusIdTgp').text(idTgp);
-
-    });
-
-});
 </script>
 
 @endsection
