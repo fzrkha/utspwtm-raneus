@@ -66,7 +66,7 @@
                     </div>
 
                     <button type="submit"
-                            class="btn-solid theme-primary w-100 fw-semibold">
+                            class="btn-solid theme-inverse w-100 fw-semibold">
                         Sign In
                     </button>
                 </form>
