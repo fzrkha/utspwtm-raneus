@@ -32,7 +32,7 @@
 <div class="card border-0 shadow-sm">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table id="tabelPelanggaran" class="table table-hover align-middle w-100">
                 <thead class="table-dark">
                     <tr>
                         <th>No.</th>
@@ -41,14 +41,14 @@
                         <th>Nama Murid</th>
                         <th>Isi Pelanggaran</th>
                         <th>Tanggal</th>
-                        <th>Foto</th>
+                        <th class="text-center" data-orderable="false">Foto</th>
                         <th>Status</th>
-                        <th class="text-center">Aksi</th>
+                        <th class="text-center" data-orderable="false">Aksi</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @forelse ($data as $pelanggaran)
+                    @foreach ($data as $pelanggaran)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $pelanggaran->id_plg }}</td>
@@ -63,7 +63,7 @@
                                 {{ \Carbon\Carbon::parse($pelanggaran->tgl_pel)->format('d/m/Y') }}
                             </td>
 
-                            <td>
+                            <td class="text-center">
                                 @if ($pelanggaran->foto)
                                     <button type="button"
                                             class="btn-outline theme-accent btn-sm btn-foto"
@@ -122,20 +122,10 @@
                                 @endif
                             </td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="9" class="text-center py-4">
-                                Belum ada data pelanggaran.
-                            </td>
-                        </tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
         </div>
-    </div>
-
-    <div class="card-footer bg-white text-muted">
-        Total {{ $data->count() }} data pelanggaran.
     </div>
 </div>
 
@@ -431,24 +421,13 @@
 </style>
 
 <script>
-    const fotoDialog = document.getElementById('fotoDialog');
     const fotoPreview = document.getElementById('fotoPreview');
-
     const zoomIn = document.getElementById('zoomIn');
     const zoomOut = document.getElementById('zoomOut');
     const zoomReset = document.getElementById('zoomReset');
     const zoomValue = document.getElementById('zoomValue');
 
     let zoomLevel = 1;
-
-    document.querySelectorAll('.btn-foto').forEach(button => {
-        button.addEventListener('click', function () {
-            fotoPreview.src = this.dataset.foto;
-
-            zoomLevel = 1;
-            updateZoom();
-        });
-    });
 
     function updateZoom() {
         fotoPreview.style.width = (zoomLevel * 100) + '%';
@@ -479,6 +458,14 @@
 
     $(document).ready(function () {
 
+        // INISIALISASI DATATABLES
+        $('#tabelPelanggaran').DataTable({
+            "pageLength": 10,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json"
+            }
+        });
+
         // DROPDOWN MURID
         $('#modalTambah .select-murid').select2({
             placeholder: 'Cari NIS atau nama murid...',
@@ -494,9 +481,15 @@
             dropdownParent: $('#modalEdit')
         });
 
+        // LIHAT FOTO - EVENT DELEGATION
+        $(document).on('click', '.btn-foto', function () {
+            fotoPreview.src = $(this).data('foto');
+            zoomLevel = 1;
+            updateZoom();
+        });
 
-        // EDIT PELANGGARAN
-        $('.btn-edit').on('click', function () {
+        // EDIT PELANGGARAN - EVENT DELEGATION
+        $(document).on('click', '.btn-edit', function () {
 
             let url = $(this).data('url');
             let idPlg = $(this).data('idplg');
@@ -530,9 +523,8 @@
 
         });
 
-
-        // HAPUS PELANGGARAN
-        $('.btn-delete').on('click', function () {
+        // HAPUS PELANGGARAN - EVENT DELEGATION
+        $(document).on('click', '.btn-delete', function () {
 
             let url = $(this).data('url');
             let idPlg = $(this).data('idplg');

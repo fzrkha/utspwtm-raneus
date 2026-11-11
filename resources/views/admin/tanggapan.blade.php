@@ -13,7 +13,7 @@
 <div class="card border-0 shadow-sm">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table id="tabelTanggapan" class="table table-hover align-middle w-100">
                 <thead class="table-dark">
                     <tr>
                         <th>No.</th>
@@ -27,7 +27,7 @@
                 </thead>
 
                 <tbody>
-                    @forelse ($data as $tanggapan)
+                    @foreach ($data as $tanggapan)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $tanggapan->id_tgp }}</td>
@@ -39,20 +39,22 @@
                             </td>
                             <td>{{ $tanggapan->pengguna->nama ?? '-' }}</td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="8" class="text-center py-4">
-                                Belum ada data tanggapan.
-                            </td>
-                        </tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-
-    <div class="card-footer bg-white text-muted">
-        Total {{ $data->count() }} data tanggapan.
-    </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        // Inisialisasi DataTables
+        $('#tabelTanggapan').DataTable({
+            "pageLength": 10,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json"
+            }
+        });
+    });
+</script>
 @endsection

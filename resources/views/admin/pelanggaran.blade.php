@@ -14,7 +14,7 @@
 <div class="card border-0 shadow-sm">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table id="tabelPelanggaran" class="table table-hover align-middle w-100">
                 <thead class="table-dark">
                     <tr>
                         <th>No.</th>
@@ -23,13 +23,13 @@
                         <th>Nama Murid</th>
                         <th>Isi Pelanggaran</th>
                         <th>Tanggal</th>
-                        <th>Foto</th>
+                        <th data-orderable="false" class="text-center">Foto</th>
                         <th>Status</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @forelse ($data as $pelanggaran)
+                    @foreach ($data as $pelanggaran)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $pelanggaran->id_plg }}</td>
@@ -44,7 +44,7 @@
                                 {{ \Carbon\Carbon::parse($pelanggaran->tgl_pel)->format('d/m/Y') }}
                             </td>
 
-                            <td>
+                            <td class="text-center">
                                 @if ($pelanggaran->foto)
                                     <button type="button"
                                             class="btn-outline theme-accent btn-sm btn-foto"
@@ -74,20 +74,10 @@
                                 @endif
                             </td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="9" class="text-center py-4">
-                                Belum ada data pelanggaran.
-                            </td>
-                        </tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
         </div>
-    </div>
-
-    <div class="card-footer bg-white text-muted">
-        Total {{ $data->count() }} data pelanggaran.
     </div>
 </div>
 
@@ -175,50 +165,55 @@
 </style>
 
 <script>
-    const fotoDialog = document.getElementById('fotoDialog');
-    const fotoPreview = document.getElementById('fotoPreview');
+    $(document).ready(function () {
+        // Inisialisasi DataTables
+        $('#tabelPelanggaran').DataTable({
+            "pageLength": 10,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json"
+            }
+        });
 
-    const zoomIn = document.getElementById('zoomIn');
-    const zoomOut = document.getElementById('zoomOut');
-    const zoomReset = document.getElementById('zoomReset');
-    const zoomValue = document.getElementById('zoomValue');
+        // Script Foto Viewer
+        const fotoPreview = document.getElementById('fotoPreview');
+        const zoomIn = document.getElementById('zoomIn');
+        const zoomOut = document.getElementById('zoomOut');
+        const zoomReset = document.getElementById('zoomReset');
+        const zoomValue = document.getElementById('zoomValue');
+        let zoomLevel = 1;
 
-    let zoomLevel = 1;
-
-    document.querySelectorAll('.btn-foto').forEach(button => {
-        button.addEventListener('click', function () {
-            fotoPreview.src = this.dataset.foto;
-
+        // Gunakan Event Delegation agar klik tombol foto berfungsi di semua pagination
+        $(document).on('click', '.btn-foto', function () {
+            fotoPreview.src = $(this).data('foto');
             zoomLevel = 1;
             updateZoom();
         });
-    });
 
-    function updateZoom() {
-        fotoPreview.style.width = (zoomLevel * 100) + '%';
-        zoomValue.textContent = Math.round(zoomLevel * 100) + '%';
-
-        zoomOut.disabled = zoomLevel <= 0.5;
-        zoomIn.disabled = zoomLevel >= 3;
-    }
-
-    zoomIn.addEventListener('click', function () {
-        if (zoomLevel < 3) {
-            zoomLevel = Math.min(zoomLevel + 0.25, 3);
-            updateZoom();
+        function updateZoom() {
+            fotoPreview.style.width = (zoomLevel * 100) + '%';
+            zoomValue.textContent = Math.round(zoomLevel * 100) + '%';
+            zoomOut.disabled = zoomLevel <= 0.5;
+            zoomIn.disabled = zoomLevel >= 3;
         }
-    });
 
-    zoomOut.addEventListener('click', function () {
-        if (zoomLevel > 0.5) {
-            zoomLevel = Math.max(zoomLevel - 0.25, 0.5);
+        zoomIn.addEventListener('click', function () {
+            if (zoomLevel < 3) {
+                zoomLevel = Math.min(zoomLevel + 0.25, 3);
+                updateZoom();
+            }
+        });
+
+        zoomOut.addEventListener('click', function () {
+            if (zoomLevel > 0.5) {
+                zoomLevel = Math.max(zoomLevel - 0.25, 0.5);
+                updateZoom();
+            }
+        });
+
+        zoomReset.addEventListener('click', function () {
+            zoomLevel = 1;
             updateZoom();
-        }
-    });
-
-    zoomReset.addEventListener('click', function () {
-        zoomLevel = 1;
-        updateZoom();
+        });
     });
 </script>
 @endsection

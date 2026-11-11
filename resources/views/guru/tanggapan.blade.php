@@ -32,7 +32,7 @@
 <div class="card border-0 shadow-sm">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table id="tabelTanggapan" class="table table-hover align-middle w-100">
                 <thead class="table-dark">
                     <tr>
                         <th>No.</th>
@@ -42,12 +42,12 @@
                         <th>Isi Tanggapan</th>
                         <th>Tanggal</th>
                         <th>Guru BK</th>
-                        <th class="text-center">Aksi</th>
+                        <th class="text-center" data-orderable="false">Aksi</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @forelse ($data as $tanggapan)
+                    @foreach ($data as $tanggapan)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $tanggapan->id_tgp }}</td>
@@ -82,20 +82,10 @@
                                 </button>
                             </td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="8" class="text-center py-4">
-                                Belum ada data tanggapan.
-                            </td>
-                        </tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
         </div>
-    </div>
-
-    <div class="card-footer bg-white text-muted">
-        Total {{ $data->count() }} data tanggapan.
     </div>
 </div>
 
@@ -282,6 +272,14 @@
 <script>
     $(document).ready(function () {
 
+        // INISIALISASI DATATABLES
+        $('#tabelTanggapan').DataTable({
+            "pageLength": 10,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json"
+            }
+        });
+
         // DROPDOWN PELANGGARAN
         $('#modalTambah .select-pelanggaran').select2({
             placeholder: 'Cari ID pelanggaran atau nama murid...',
@@ -298,8 +296,8 @@
         });
 
 
-        // EDIT TANGGAPAN
-        $('.btn-edit').on('click', function () {
+        // EDIT TANGGAPAN - EVENT DELEGATION
+        $(document).on('click', '.btn-edit', function () {
 
             let url = $(this).data('url');
             let idTgp = $(this).data('idtgp');
@@ -317,8 +315,8 @@
         });
 
 
-        // HAPUS TANGGAPAN
-        $('.btn-delete').on('click', function () {
+        // HAPUS TANGGAPAN - EVENT DELEGATION
+        $(document).on('click', '.btn-delete', function () {
 
             let url = $(this).data('url');
             let idTgp = $(this).data('idtgp');
