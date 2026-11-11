@@ -199,7 +199,7 @@
                 <label class="form-label">Foto Bukti</label>
                 <input type="file" name="foto"
                     class="form-control"
-                    accept="image/jpeg,image/png,image/jpg">
+                    accept="image/jpeg,image/png,image/jpg" required>
 
                 <small class="text-muted">
                     Format JPG, JPEG, atau PNG.
